@@ -19,10 +19,13 @@ module.exports = {
     };
   },
 
+  toTree: function(tree, inputPath, outputPath, inputOptions){
+    var favicons = new Favicons(tree, this.options);
+    return mergeTrees([ tree, favicons ]);
+  },
+
   postprocessTree: function(type, tree) {
     if (type === 'all') {
-      var favicons = new Favicons(tree, this.options);
-      tree = mergeTrees([ tree, favicons ]);
       return replace(tree, {
         files: [ 'index.html' ],
         patterns: [{
